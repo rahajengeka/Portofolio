@@ -47,6 +47,26 @@ function App() {
 
   return (
     <>
+      {/* INJEKSI MEDIA QUERIES UNTUK RESPONSIVITAS */}
+      <style>{`
+        @media (max-width: 768px) {
+          header { padding: 15px 5% !important; }
+          nav { gap: 15px !important; }
+          .nav-link-main { display: none !important; } /* Sembunyikan link biasa di mobile untuk ringkas */
+          
+          .hero-section { height: auto !important; min-height: 100vh; padding: 120px 5% 60px 5% !important; flex-direction: column; justify-content: flex-start !important; }
+          .hero-image { position: relative !important; height: 45vh !important; bottom: unset !important; margin-top: 20px; margin-bottom: 20px; }
+          .info-top-left, .info-top-right, .info-bottom-left, .info-bottom-right { position: relative !important; top: unset !important; bottom: unset !important; left: unset !important; right: unset !important; text-align: center !important; max-width: 100% !important; margin: 10px 0; }
+          .info-bottom-left { order: 5; }
+          .info-bottom-right { order: 6; }
+          .links-container { justify-content: center; }
+          
+          .section-padding { padding: 60px 5% !important; }
+          .philosophy-card { flex-direction: column; text-align: center; padding: 30px !important; gap: 20px !important; }
+          .contact-box { padding: 40px 15px !important; }
+        }
+      `}</style>
+
       {/* LOADER COMPONENT */}
       <AnimatePresence>
         {loading && (
@@ -76,7 +96,7 @@ function App() {
                 transition={{ repeat: Infinity, duration: 1.5 }}
                 style={styles.loaderText}
               >
-                LOADING PORTFOLIO...
+                LOADING PORTOFOLIO...
               </motion.p>
             </div>
           </motion.div>
@@ -90,12 +110,13 @@ function App() {
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, delay: 2.2 }}
           style={styles.header}
+          className="header"
         >
           <div style={styles.logo}>RAHAJENG<span style={styles.logoAccent}>EKA</span></div>
           <nav style={styles.nav}>
-            <a href="#home" style={styles.navLink}>Home</a>
-            <a href="#portfolio" style={styles.navLink}>Works</a>
-            <a href="#skills" style={styles.navLink}>Skills</a>
+            <a href="#home" style={styles.navLink} className="nav-link-main">Home</a>
+            <a href="#portfolio" style={styles.navLink} className="nav-link-main">Works</a>
+            <a href="#skills" style={styles.navLink} className="nav-link-main">Skills</a>
             <motion.a 
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -107,7 +128,7 @@ function App() {
         </motion.header>
 
         {/* Hero Section Banner */}
-        <section id="home" style={styles.heroSection}>
+        <section id="home" style={styles.heroSection} className="hero-section">
           <div style={styles.heroBlurBg}></div>
           
           <motion.h1 
@@ -126,6 +147,7 @@ function App() {
             src="/foto-rahajeng.png" 
             alt="Rahajeng Eka" 
             style={styles.heroImage} 
+            className="hero-image"
           />
 
           <motion.div 
@@ -133,6 +155,7 @@ function App() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1 }}
             style={styles.infoTopLeft}
+            className="info-top-left"
           >
             CREATIVE PORTFOLIO
           </motion.div>
@@ -142,6 +165,7 @@ function App() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1 }}
             style={styles.infoTopRight}
+            className="info-top-right"
           >
             AVAILABLE FOR HIRE
           </motion.div>
@@ -151,11 +175,12 @@ function App() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 1.2 }}
             style={styles.infoBottomLeft}
+            className="info-bottom-left"
           >
             <p style={styles.shortDesc}>
               Halo, saya <b>Rahajeng Eka Wahyuningtiyas</b>. yang membawa ketajaman estetika desain ke dalam dunia pemrograman. <i>Blending Visual Art with Digital Logic.</i>
             </p>
-            <div style={styles.linksContainer}>
+            <div style={styles.linksContainer} className="links-container">
               <span style={styles.infoLink}>rahajengeka-portofolio.vercel.app.com</span>
             </div>
           </motion.div>
@@ -165,13 +190,14 @@ function App() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 1.2 }}
             style={styles.infoBottomRight}
+            className="info-bottom-right"
           >
             Based in Malang, Indonesia
           </motion.div>
         </section>
 
         {/* Portfolio Section */}
-        <section id="portfolio" style={styles.section}>
+        <section id="portfolio" style={styles.section} className="section-padding">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -212,7 +238,7 @@ function App() {
         </section>
 
         {/* Skills Section */}
-        <section id="skills" style={styles.section}>
+        <section id="skills" style={styles.section} className="section-padding">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -251,13 +277,14 @@ function App() {
         </section>
 
         {/* Philosophy */}
-        <section id="philosophy" style={styles.section}>
+        <section id="philosophy" style={styles.section} className="section-padding">
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
             style={styles.philosophyCard}
+            className="philosophy-card"
           >
             <div style={styles.philoIcon}>✨</div>
             <div>
@@ -270,12 +297,13 @@ function App() {
         </section>
 
         {/* Contact Section */}
-        <footer id="contact" style={styles.footer}>
+        <footer id="contact" style={styles.footer} className="section-padding">
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             style={styles.contactBox}
+            className="contact-box"
           >
             <h2 style={{ fontSize: '2rem', marginBottom: '15px' }}>Let's Create Magic!</h2>
             <p style={{ color: '#94a3b8', marginBottom: '35px' }}>Tertarik membangun projek digital yang memikat? Hubungi saya sekarang.</p>
@@ -341,47 +369,47 @@ const styles = {
   logoAccent: { color: '#3b82f6' },
   nav: { display: 'flex', gap: '30px', alignItems: 'center' },
   navLink: { color: '#94a3b8', textDecoration: 'none', fontSize: '0.85rem', fontWeight: '600', transition: '0.3s' },
-  navLinkContact: { color: '#fff', textDecoration: 'none', fontSize: '0.85rem', fontWeight: '700', background: '#3b82f6', padding: '8px 20px', borderRadius: '50px' },
+  navLinkContact: { color: '#fff', textDecoration: 'none', fontSize: '0.85rem', fontWeight: '700', background: '#3b82f6', padding: '8px 20px', borderRadius: '50px', whiteSpace: 'nowrap' },
   
-  heroSection: { position: 'relative', width: '100%', height: '100vh', backgroundColor: '#000', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' },
+  heroSection: { position: 'relative', width: '100%', height: '100vh', backgroundColor: '#000', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', boxSizing: 'border-box' },
   heroBlurBg: { position: 'absolute', width: '100%', height: '100%', backgroundImage: 'url("/foto-rahajeng.png")', backgroundSize: 'cover', backgroundPosition: 'center', filter: 'blur(35px) grayscale(100%) brightness(20%)', transform: 'scale(1.1)', zIndex: 1 },
-  bgPortfolioText: { position: 'absolute', fontSize: 'clamp(5rem, 18vw, 15rem)', fontWeight: '900', color: '#ffffff', letterSpacing: '-2px', margin: 0, zIndex: 2, textAlign: 'center', width: '100%', userSelect: 'none' },
-  heroImage: { position: 'absolute', bottom: 0, height: '85vh', zIndex: 3, objectFit: 'contain' },
+  bgPortfolioText: { position: 'absolute', fontSize: 'clamp(3rem, 15vw, 15rem)', fontWeight: '900', color: '#ffffff', letterSpacing: '-2px', margin: 0, zIndex: 2, textAlign: 'center', width: '100%', userSelect: 'none' },
+  heroImage: { position: 'absolute', bottom: 0, height: '85vh', maxHeight: '100%', zIndex: 3, objectFit: 'contain' },
   infoTopLeft: { position: 'absolute', top: '100px', left: '8%', color: '#fff', fontSize: '0.8rem', fontWeight: '700', letterSpacing: '2px', zIndex: 4 },
   infoTopRight: { position: 'absolute', top: '100px', right: '8%', color: '#fff', fontSize: '0.8rem', fontWeight: '700', letterSpacing: '2px', zIndex: 4 },
   infoBottomLeft: { position: 'absolute', bottom: '40px', left: '8%', maxWidth: '350px', zIndex: 4, textAlign: 'left' },
   shortDesc: { fontSize: '0.75rem', color: '#94a3b8', lineHeight: '1.6', margin: '0 0 15px 0' },
   linksContainer: { display: 'flex', gap: '20px' },
-  infoLink: { fontSize: '0.8rem', color: '#fff', fontWeight: '500' },
+  infoLink: { fontSize: '0.8rem', color: '#fff', fontWeight: '500', wordBreak: 'break-all' },
   infoBottomRight: { position: 'absolute', bottom: '40px', right: '8%', color: '#94a3b8', fontSize: '0.8rem', zIndex: 4 },
 
-  section: { padding: '100px 8%' },
+  section: { padding: '100px 8%', boxSizing: 'border-box' },
   sectionHeader: { marginBottom: '50px' },
   sectionTitle: { fontSize: '2rem', fontWeight: '800', marginBottom: '10px' },
   titleLine: { width: '40px', height: '4px', background: '#3b82f6', borderRadius: '10px' },
 
-  portfolioGrid: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '30px' },
+  portfolioGrid: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '30px' },
   card: { background: '#0f172a', borderRadius: '24px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.05)' },
   cardTop: { height: '180px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'rgba(255,255,255,0.2)' },
   cardBody: { padding: '30px' },
-  cardTagGroup: { display: 'flex', gap: '8px', marginBottom: '15px' },
+  cardTagGroup: { display: 'flex', gap: '8px', marginBottom: '15px', flexWrap: 'wrap' },
   cardTag: { fontSize: '0.7rem', fontWeight: '700', color: '#3b82f6', background: 'rgba(59,130,246,0.1)', padding: '4px 10px', borderRadius: '6px' },
   cardTitle: { fontSize: '1.4rem', marginBottom: '12px' },
   cardDesc: { color: '#94a3b8', fontSize: '0.95rem', lineHeight: '1.6', marginBottom: '25px' },
   cardLink: { display: 'inline-flex', alignItems: 'center', gap: '8px', color: '#fff', textDecoration: 'none', fontWeight: '700', fontSize: '0.9rem' },
   cardLinkDisabled: { color: '#475569', fontSize: '0.85rem' },
 
-  skillsWrapper: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '30px' },
-  skillBox: { background: '#0f172a', padding: '40px', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.05)' },
+  skillsWrapper: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '30px' },
+  skillBox: { background: '#0f172a', padding: '40px 30px', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.05)', boxSizing: 'border-box' },
   skillBoxTitle: { fontSize: '1.2rem', marginBottom: '25px', color: '#3b82f6' },
   skillTags: { display: 'flex', flexWrap: 'wrap', gap: '10px' },
   skillTag: { padding: '10px 20px', background: 'rgba(255,255,255,0.03)', borderRadius: '12px', fontSize: '0.9rem', border: '1px solid rgba(255,255,255,0.05)' },
 
-  philosophyCard: { background: 'linear-gradient(135deg, #1e1b4b, #0f172a)', padding: '50px', borderRadius: '32px', display: 'flex', gap: '30px', alignItems: 'center', border: '1px solid rgba(99,102,241,0.2)' },
+  philosophyCard: { background: 'linear-gradient(135deg, #1e1b4b, #0f172a)', padding: '50px', borderRadius: '32px', display: 'flex', gap: '30px', alignItems: 'center', border: '1px solid rgba(99,102,241,0.2)', boxSizing: 'border-box' },
   philoIcon: { fontSize: '2.5rem', background: 'rgba(255,255,255,0.05)', padding: '20px', borderRadius: '20px' },
 
-  footer: { padding: '100px 8% 50px 8%', textAlign: 'center' },
-  contactBox: { background: '#0f172a', padding: '60px 20px', borderRadius: '40px', marginBottom: '60px', border: '1px solid rgba(255,255,255,0.05)' },
+  footer: { padding: '100px 8% 50px 8%', textAlign: 'center', boxSizing: 'border-box' },
+  contactBox: { background: '#0f172a', padding: '60px 20px', borderRadius: '40px', marginBottom: '60px', border: '1px solid rgba(255,255,255,0.05)', boxSizing: 'border-box' },
   socialLinks: { display: 'flex', justifyContent: 'center', gap: '15px', flexWrap: 'wrap' },
   socialBtn: { display: 'inline-flex', alignItems: 'center', gap: '10px', padding: '12px 25px', background: '#1e293b', color: '#fff', textDecoration: 'none', borderRadius: '12px', fontWeight: '600', transition: '0.3s' },
   copyright: { color: '#475569', fontSize: '0.85rem' }
