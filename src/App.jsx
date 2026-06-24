@@ -23,6 +23,20 @@ const Icons = {
   )
 };
 
+// Varian untuk animasi stagger (muncul satu per satu)
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.2 }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+};
+
 function App() {
   const [loading, setLoading] = useState(true);
 
@@ -62,7 +76,7 @@ function App() {
                 transition={{ repeat: Infinity, duration: 1.5 }}
                 style={styles.loaderText}
               >
-                Preparing Aesthetics...
+                LOADING PORTFOLIO...
               </motion.p>
             </div>
           </motion.div>
@@ -71,96 +85,180 @@ function App() {
 
       <div style={styles.body}>
         {/* Navbar */}
-        <header style={styles.header}>
+        <motion.header 
+          initial={{ y: -50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.8, delay: 2.2 }}
+          style={styles.header}
+        >
           <div style={styles.logo}>RAHAJENG<span style={styles.logoAccent}>EKA</span></div>
           <nav style={styles.nav}>
             <a href="#home" style={styles.navLink}>Home</a>
             <a href="#portfolio" style={styles.navLink}>Works</a>
             <a href="#skills" style={styles.navLink}>Skills</a>
-            <a href="#contact" style={styles.navLinkContact}>Let's Talk</a>
+            <motion.a 
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              href="#contact" style={styles.navLinkContact}
+            >
+              Let's Talk
+            </motion.a>
           </nav>
-        </header>
+        </motion.header>
 
-        {/* Hero Section */}
+        {/* Hero Section Banner */}
         <section id="home" style={styles.heroSection}>
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-            style={styles.heroContent}
+          <div style={styles.heroBlurBg}></div>
+          
+          <motion.h1 
+            initial={{ opacity: 0, scale: 0.96 }}
+            animate={{ opacity: 0.12, scale: 1 }}
+            transition={{ duration: 1.4, ease: "easeOut", delay: 0.2 }}
+            style={styles.bgPortfolioText}
           >
-            <div style={styles.badge}>
-              <Icons.Sparkles /> FRONTEND DEVELOPER & UI/UX
-            </div>
-            <h1 style={styles.heroTitle}>
-              Blending <span style={styles.gradientText}>Visual Art</span> <br /> 
-              with Digital Logic.
-            </h1>
-            <p style={styles.heroSubtitle}>
-              Halo, saya <b>Rahajeng Eka</b>. Mahasiswa Teknologi Informasi yang membawa ketajaman estetika dari dunia MUA ke dalam baris kode pemrograman.
+            PORTFOLIO
+          </motion.h1>
+
+          <motion.img 
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2, ease: "easeOut", delay: 0.5 }}
+            src="/foto-rahajeng.png" 
+            alt="Rahajeng Eka" 
+            style={styles.heroImage} 
+          />
+
+          <motion.div 
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1 }}
+            style={styles.infoTopLeft}
+          >
+            CREATIVE PORTFOLIO
+          </motion.div>
+          
+          <motion.div 
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1 }}
+            style={styles.infoTopRight}
+          >
+            AVAILABLE FOR HIRE
+          </motion.div>
+          
+          <motion.div 
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 1.2 }}
+            style={styles.infoBottomLeft}
+          >
+            <p style={styles.shortDesc}>
+              Halo, saya <b>Rahajeng Eka Wahyuningtiyas</b>. yang membawa ketajaman estetika desain ke dalam dunia pemrograman. <i>Blending Visual Art with Digital Logic.</i>
             </p>
-            <div style={styles.btnGroup}>
-              <a href="#portfolio" style={styles.btnPrimary}>View Projects</a>
-              <a href="#contact" style={styles.btnSecondary}>Contact Me</a>
+            <div style={styles.linksContainer}>
+              <span style={styles.infoLink}>rahajengeka-portofolio.vercel.app.com</span>
             </div>
+          </motion.div>
+          
+          <motion.div 
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 1.2 }}
+            style={styles.infoBottomRight}
+          >
+            Based in Malang, Indonesia
           </motion.div>
         </section>
 
         {/* Portfolio Section */}
         <section id="portfolio" style={styles.section}>
-          <div style={styles.sectionHeader}>
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            style={styles.sectionHeader}
+          >
             <h2 style={styles.sectionTitle}>Portofolio Projek</h2>
             <div style={styles.titleLine}></div>
-          </div>
+          </motion.div>
 
-          <div style={styles.portfolioGrid}>
+         <motion.div 
+           variants={containerVariants}
+           initial="hidden"
+           whileInView="visible"
+           viewport={{ once: true }}
+           style={styles.portfolioGrid}
+         >
             <ProjectCard 
               title="Smart Oryza Platform"
               tags={["Laravel", "Flutter"]}
               desc="Integrasi dashboard web dan aplikasi mobile untuk optimalisasi sektor agrikultur pangan."
               link="http://smartoryza.site"
-              color="#065f46"
+              image="/project-smartoryza.png" 
             />
             <ProjectCard 
               title="Pintar Ceria — Web Edu"
               tags={["Native PHP", "UI/UX"]}
               desc="Platform e-learning interaktif ramah anak untuk siswa Sekolah Dasar (SD)."
-              color="#1e293b"
+              image="/project-edukasi.png"
             />
             <ProjectCard 
               title="Tatik Catering"
               tags={["Web Dev", "Sistem Informasi"]}
               desc="Sistem katalog informasi menu kuliner estetis dengan fitur simulasi pemesanan."
-              color="#701a75"
+              image="/project-catering.png"
             />
-          </div>
+          </motion.div>
         </section>
 
         {/* Skills Section */}
         <section id="skills" style={styles.section}>
-          <div style={styles.sectionHeader}>
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            style={styles.sectionHeader}
+          >
             <h2 style={styles.sectionTitle}>Expertise</h2>
             <div style={styles.titleLine}></div>
-          </div>
+          </motion.div>
           <div style={styles.skillsWrapper}>
-            <div style={styles.skillBox}>
+            <motion.div 
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              style={styles.skillBox}
+            >
               <h3 style={styles.skillBoxTitle}>Frontend Stack</h3>
               <div style={styles.skillTags}>
                 {["Flutter", "Laravel", "React.js", "PHP OOP", "Tailwind CSS"].map(s => <span key={s} style={styles.skillTag}>{s}</span>)}
               </div>
-            </div>
-            <div style={styles.skillBox}>
+            </motion.div>
+            <motion.div 
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              style={styles.skillBox}
+            >
               <h3 style={styles.skillBoxTitle}>Creative Design</h3>
               <div style={styles.skillTags}>
                 {["Figma", "UI/UX Wireframing", "Canva", "CapCut Editor"].map(s => <span key={s} style={styles.skillTag}>{s}</span>)}
               </div>
-            </div>
+            </motion.div>
           </div>
         </section>
 
         {/* Philosophy */}
         <section id="philosophy" style={styles.section}>
-          <div style={styles.philosophyCard}>
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            style={styles.philosophyCard}
+          >
             <div style={styles.philoIcon}>✨</div>
             <div>
               <h3 style={{ fontSize: '1.5rem', marginBottom: '10px' }}>The MUA Precision</h3>
@@ -168,20 +266,25 @@ function App() {
                 Pengalaman saya sebagai <b>Freelance MUA</b> mengasah detail visual dan keselarasan warna. Saya mentransformasikan estetika ini ke UI Design yang bersih, harmonis, dan fungsional.
               </p>
             </div>
-          </div>
+          </motion.div>
         </section>
 
         {/* Contact Section */}
         <footer id="contact" style={styles.footer}>
-          <div style={styles.contactBox}>
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            style={styles.contactBox}
+          >
             <h2 style={{ fontSize: '2rem', marginBottom: '15px' }}>Let's Create Magic!</h2>
             <p style={{ color: '#94a3b8', marginBottom: '35px' }}>Tertarik membangun projek digital yang memikat? Hubungi saya sekarang.</p>
             <div style={styles.socialLinks}>
-              <a href="mailto:rahajengg29@gmail.com" style={styles.socialBtn}><Icons.Mail /> Email</a>
-              <a href="https://www.linkedin.com/in/rahajeng-eka-a18b7b320" target="_blank" rel="noreferrer" style={styles.socialBtn}><Icons.Linkedin /> LinkedIn</a>
-              <a href="https://github.com/rahajengeka" target="_blank" rel="noreferrer" style={styles.socialBtn}><Icons.Github /> GitHub</a>
+              <motion.a whileHover={{ y: -5 }} href="mailto:rahajengg29@gmail.com" style={styles.socialBtn}><Icons.Mail /> Email</motion.a>
+              <motion.a whileHover={{ y: -5 }} href="https://www.linkedin.com/in/rahajeng-eka-a18b7b320" target="_blank" rel="noreferrer" style={styles.socialBtn}><Icons.Linkedin /> LinkedIn</motion.a>
+              <motion.a whileHover={{ y: -5 }} href="https://github.com/rahajengeka" target="_blank" rel="noreferrer" style={styles.socialBtn}><Icons.Github /> GitHub</motion.a>
             </div>
-          </div>
+          </motion.div>
           <p style={styles.copyright}>&copy; 2026 Rahajeng Eka Wahyuningtiyas. Crafted for Perfection.</p>
         </footer>
       </div>
@@ -189,12 +292,20 @@ function App() {
   );
 }
 
-// Sub-component Kartu Projek
-function ProjectCard({ title, tags, desc, link, color }) {
+// Sub-component Kartu Projek dengan animasi fade-in up
+function ProjectCard({ title, tags, desc, link, image }) {
   return (
-    <motion.div whileHover={{ y: -10 }} style={styles.card}>
-      <div style={{ ...styles.cardTop, background: `linear-gradient(135deg, ${color}, #000)` }}>
-        <Icons.Layers />
+    <motion.div 
+      variants={itemVariants}
+      whileHover={{ y: -10 }} 
+      style={styles.card}
+    >
+      <div style={{ 
+        ...styles.cardTop, 
+        backgroundImage: `url(${image})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center'
+      }}>
       </div>
       <div style={styles.cardBody}>
         <div style={styles.cardTagGroup}>
@@ -225,23 +336,24 @@ const styles = {
 
   // MAIN STYLES
   body: { backgroundColor: '#05070a', color: '#f1f5f9', minHeight: '100vh', fontFamily: 'system-ui, -apple-system, sans-serif', scrollBehavior: 'smooth' },
-  header: { position: 'fixed', top: 0, width: '100%', padding: '20px 8%', background: 'rgba(5, 7, 10, 0.8)', backdropFilter: 'blur(15px)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 1000, boxSizing: 'border-box', borderBottom: '1px solid rgba(255,255,255,0.05)' },
+  header: { position: 'fixed', top: 0, width: '100%', padding: '20px 8%', background: 'rgba(5, 7, 10, 0.4)', backdropFilter: 'blur(15px)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 1000, boxSizing: 'border-box', borderBottom: '1px solid rgba(255,255,255,0.05)' },
   logo: { fontSize: '1.1rem', fontWeight: '900', letterSpacing: '2px' },
   logoAccent: { color: '#3b82f6' },
   nav: { display: 'flex', gap: '30px', alignItems: 'center' },
   navLink: { color: '#94a3b8', textDecoration: 'none', fontSize: '0.85rem', fontWeight: '600', transition: '0.3s' },
   navLinkContact: { color: '#fff', textDecoration: 'none', fontSize: '0.85rem', fontWeight: '700', background: '#3b82f6', padding: '8px 20px', borderRadius: '50px' },
   
-  heroSection: { padding: '160px 8% 80px 8%', minHeight: '80vh', display: 'flex', alignItems: 'center' },
-  heroContent: { maxWidth: '850px' },
-  badge: { display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(59,130,246,0.1)', color: '#60a5fa', padding: '8px 18px', borderRadius: '50px', fontSize: '0.75rem', fontWeight: '800', marginBottom: '30px', border: '1px solid rgba(59,130,246,0.2)' },
-  heroTitle: { fontSize: 'clamp(2.5rem, 8vw, 4.5rem)', fontWeight: '900', lineHeight: '1.1', margin: '0 0 30px 0' },
-  gradientText: { background: 'linear-gradient(to right, #3b82f6, #a855f7)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' },
-  heroSubtitle: { fontSize: '1.2rem', color: '#94a3b8', lineHeight: '1.8', marginBottom: '45px', maxWidth: '650px' },
-  
-  btnGroup: { display: 'flex', gap: '15px' },
-  btnPrimary: { padding: '15px 35px', borderRadius: '12px', background: '#3b82f6', color: '#fff', textDecoration: 'none', fontWeight: '700', boxShadow: '0 10px 20px rgba(59,130,246,0.2)' },
-  btnSecondary: { padding: '15px 35px', borderRadius: '12px', border: '1px solid #334155', color: '#fff', textDecoration: 'none', fontWeight: '700' },
+  heroSection: { position: 'relative', width: '100%', height: '100vh', backgroundColor: '#000', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' },
+  heroBlurBg: { position: 'absolute', width: '100%', height: '100%', backgroundImage: 'url("/foto-rahajeng.png")', backgroundSize: 'cover', backgroundPosition: 'center', filter: 'blur(35px) grayscale(100%) brightness(20%)', transform: 'scale(1.1)', zIndex: 1 },
+  bgPortfolioText: { position: 'absolute', fontSize: 'clamp(5rem, 18vw, 15rem)', fontWeight: '900', color: '#ffffff', letterSpacing: '-2px', margin: 0, zIndex: 2, textAlign: 'center', width: '100%', userSelect: 'none' },
+  heroImage: { position: 'absolute', bottom: 0, height: '85vh', zIndex: 3, objectFit: 'contain' },
+  infoTopLeft: { position: 'absolute', top: '100px', left: '8%', color: '#fff', fontSize: '0.8rem', fontWeight: '700', letterSpacing: '2px', zIndex: 4 },
+  infoTopRight: { position: 'absolute', top: '100px', right: '8%', color: '#fff', fontSize: '0.8rem', fontWeight: '700', letterSpacing: '2px', zIndex: 4 },
+  infoBottomLeft: { position: 'absolute', bottom: '40px', left: '8%', maxWidth: '350px', zIndex: 4, textAlign: 'left' },
+  shortDesc: { fontSize: '0.75rem', color: '#94a3b8', lineHeight: '1.6', margin: '0 0 15px 0' },
+  linksContainer: { display: 'flex', gap: '20px' },
+  infoLink: { fontSize: '0.8rem', color: '#fff', fontWeight: '500' },
+  infoBottomRight: { position: 'absolute', bottom: '40px', right: '8%', color: '#94a3b8', fontSize: '0.8rem', zIndex: 4 },
 
   section: { padding: '100px 8%' },
   sectionHeader: { marginBottom: '50px' },
