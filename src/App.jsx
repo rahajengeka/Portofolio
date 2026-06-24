@@ -116,7 +116,7 @@ function App() {
             transition={{ duration: 1.4, ease: "easeOut", delay: 0.2 }}
             style={styles.bgPortfolioText}
           >
-            PORTFOLIO
+            PORTOFOLIO
           </motion.h1>
 
           <motion.img 
