@@ -20,6 +20,8 @@ import { FaGithub, FaLinkedinIn } from 'react-icons/fa6';
 import { styles } from './App.styles';
 import ReactBitsLanyard from './components/ReactBitsLanyard';
 import SplitText from './components/SplitText';
+import BorderGlow from './components/BorderGlow';
+import CustomCursor from './components/CustomCursor';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -115,7 +117,7 @@ function App() {
 
   // General listeners & responsive check
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 4200);
+    const timer = setTimeout(() => setLoading(false), 6000);
     const checkDevice = () => { 
       setIsMobile(window.innerWidth <= 890); 
     };
@@ -154,6 +156,8 @@ function App() {
   return (
     <>
       <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap');
+
         .bg-backdrop-text {
           white-space: nowrap !important;
           letter-spacing: 0.08em !important;
@@ -164,17 +168,63 @@ function App() {
         .nav-item-link:hover {
           color: #38bdf8 !important;
         }
+        /* === Glow Border Cards === */
+        @keyframes glow-border-pulse {
+          0%, 100% { box-shadow: 0 0 0 0 rgba(56,189,248,0), 0 20px 50px rgba(0,0,0,0.5); }
+          50% { box-shadow: 0 0 18px 3px rgba(56,189,248,0.18), 0 20px 50px rgba(0,0,0,0.5); }
+        }
+        .card-project {
+          animation: glow-border-pulse 3.5s ease-in-out infinite;
+        }
         .card-project:hover .project-img {
           transform: scale(1.05);
         }
         .card-project:hover {
-          border-color: rgba(56, 189, 248, 0.45) !important;
-          box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), 0 0 25px rgba(56, 189, 248, 0.12) !important;
+          border-color: rgba(56, 189, 248, 0.55) !important;
+          box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), 0 0 30px rgba(56, 189, 248, 0.22) !important;
           transform: translateY(-6px);
+          animation: none;
+        }
+        .skill-box-glow {
+          animation: glow-border-pulse 4s ease-in-out infinite;
+        }
+        .skill-box-glow:hover {
+          border-color: rgba(56, 189, 248, 0.4) !important;
+          box-shadow: 0 0 24px rgba(56, 189, 248, 0.18), 0 20px 50px rgba(0,0,0,0.5) !important;
+          animation: none;
         }
         .interactive-btn {
           cursor: pointer;
         }
+        /* === Elegant Loading Screen Animations === */
+        @keyframes loader-name-in {
+          0% { opacity: 0; transform: translateY(22px); filter: blur(8px); }
+          100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+        }
+        @keyframes loader-profession-in {
+          0% { opacity: 0; transform: translateY(14px); }
+          100% { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes loader-line-in {
+          0% { width: 0; opacity: 0; }
+          100% { width: 60px; opacity: 1; }
+        }
+        @keyframes loader-dot-pulse {
+          0%, 100% { opacity: 0.3; transform: scale(0.8); }
+          50% { opacity: 1; transform: scale(1.2); }
+        }
+        .loader-name-anim {
+          animation: loader-name-in 1.1s cubic-bezier(0.16,1,0.3,1) 0.3s both;
+        }
+        .loader-profession-anim {
+          animation: loader-profession-in 1.0s cubic-bezier(0.16,1,0.3,1) 0.85s both;
+        }
+        .loader-line-anim {
+          animation: loader-line-in 0.8s cubic-bezier(0.16,1,0.3,1) 0.6s both;
+        }
+        .loader-dot-1 { animation: loader-dot-pulse 1.4s ease-in-out 1.4s infinite; }
+        .loader-dot-2 { animation: loader-dot-pulse 1.4s ease-in-out 1.6s infinite; }
+        .loader-dot-3 { animation: loader-dot-pulse 1.4s ease-in-out 1.8s infinite; }
         @media (max-width: 1040px) and (min-width: 891px) {
           .nav-desktop { gap: 14px !important; }
           .nav-item-link { font-size: 0.78rem !important; }
@@ -185,13 +235,17 @@ function App() {
           .hero-section-wrap {
             height: auto !important;
             min-height: 100vh;
-            padding: 130px 6% 60px 6% !important;
+            padding: 120px 5% 70px 5% !important;
             flex-direction: column !important;
             justify-content: flex-start !important;
+            align-items: center !important;
           }
           .hero-img-wrap {
-            height: 48vh !important;
-            margin: 20px 0 !important;
+            height: 42vw !important;
+            min-height: 260px !important;
+            max-height: 360px !important;
+            margin: 16px 0 !important;
+            width: 100% !important;
           }
           .info-pos-static {
             position: relative !important;
@@ -201,13 +255,37 @@ function App() {
             right: unset !important;
             text-align: center !important;
             max-width: 100% !important;
+            width: 100% !important;
             margin: 8px 0;
             justify-content: center !important;
           }
           .bg-backdrop-text {
-            font-size: 16vw !important;
+            font-size: 18vw !important;
             white-space: pre-line !important;
             line-height: 1 !important;
+          }
+          .portfolio-grid-responsive {
+            grid-template-columns: 1fr !important;
+          }
+          .skills-wrap-responsive {
+            flex-direction: column !important;
+          }
+          .hero-cta-group-resp {
+            justify-content: center !important;
+            flex-wrap: wrap !important;
+          }
+          .contact-actions-resp {
+            flex-direction: column !important;
+            align-items: center !important;
+          }
+          .social-links-resp {
+            justify-content: center !important;
+          }
+        }
+        @media (max-width: 480px) {
+          .hero-img-wrap {
+            height: 55vw !important;
+            min-height: 200px !important;
           }
         }
         @media (min-width: 891px) {
@@ -219,28 +297,8 @@ function App() {
       {/* Top Reading Progress Line */}
       <motion.div style={{ ...styles.progressBar, scaleX }} />
 
-      {/* Dual Modern Tech Cursor (Desktop Only) */}
-      {!isMobile && !loading && (
-        <>
-          <motion.div 
-            className="custom-cursor"
-            animate={{ 
-              x: mousePos.x, 
-              y: mousePos.y,
-              scale: cursorHovered ? 1.4 : 1,
-              borderColor: cursorHovered ? '#38bdf8' : 'rgba(56, 189, 248, 0.65)'
-            }}
-            transition={{ type: "spring", stiffness: 350, damping: 25, mass: 0.15 }}
-            style={styles.customCursor}
-          />
-          <motion.div 
-            className="custom-cursor-dot"
-            animate={{ x: mousePos.x, y: mousePos.y }}
-            transition={{ type: "spring", stiffness: 900, damping: 35 }}
-            style={styles.customCursorDot}
-          />
-        </>
-      )}
+      {/* Custom Cursor — rAF smooth glowing cursor (Desktop only) */}
+      {!isMobile && <CustomCursor />}
 
       {/* Toast Notification on Email Copy */}
       <AnimatePresence>
@@ -257,142 +315,131 @@ function App() {
         )}
       </AnimatePresence>
 
-      {/* 1. INITIAL LOADING SCREEN WITH 2-COLUMN LUXURY SPLIT */}
+      {/* 1. LOADING SCREEN — Lanyard + Elegant Text */}
       <AnimatePresence>
         {loading && (
           <motion.div
-            key="reactbits-3d-loader"
-            exit={{ opacity: 0, scale: 0.98, y: -20, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } }}
-            style={styles.loaderContainer}
+            key="split-loader"
+            exit={{ opacity: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }}
+            style={{
+              ...styles.loaderContainer,
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: 0,
+              cursor: 'pointer',
+              padding: '20px 5%'
+            }}
             onClick={() => setLoading(false)}
           >
-            {/* Background Ambient Orbs inside loader */}
-            <div style={{
-              position: 'absolute',
-              top: '10%',
-              left: '12%',
-              width: '450px',
-              height: '450px',
-              borderRadius: '50%',
-              background: 'radial-gradient(circle, rgba(56, 189, 248, 0.12) 0%, transparent 70%)',
-              filter: 'blur(80px)',
-              pointerEvents: 'none'
-            }} />
-            <div style={{
-              position: 'absolute',
-              bottom: '10%',
-              right: '12%',
-              width: '500px',
-              height: '500px',
-              borderRadius: '50%',
-              background: 'radial-gradient(circle, rgba(37, 99, 235, 0.14) 0%, transparent 70%)',
-              filter: 'blur(90px)',
-              pointerEvents: 'none'
-            }} />
+            {/* Ambient Orbs */}
+            <div style={{ position: 'absolute', top: '10%', left: '10%', width: '500px', height: '500px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(56,189,248,0.09) 0%, transparent 70%)', filter: 'blur(90px)', pointerEvents: 'none' }} />
+            <div style={{ position: 'absolute', bottom: '10%', right: '10%', width: '420px', height: '420px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(37,99,235,0.11) 0%, transparent 70%)', filter: 'blur(80px)', pointerEvents: 'none' }} />
 
-            {/* Split Content Wrapper: Left (Info) & Right (1 Lanyard) */}
-            <div 
+            {/* Flex Wrapper — stops click propagation so lanyard is draggable */}
+            <div
               style={{
                 display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                width: '100%',
-                maxWidth: '1200px',
-                padding: '20px 4%',
-                gap: '40px',
                 flexDirection: isMobile ? 'column-reverse' : 'row',
-                zIndex: 10,
-                position: 'relative'
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: '100%',
+                maxWidth: '1100px',
+                gap: isMobile ? '24px' : '60px',
+                zIndex: 10
               }}
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Samping Kiri: Super Concise & Sleek Loading Page */}
-              <div style={{
-                flex: '1 1 45%',
-                maxWidth: '460px',
-                textAlign: isMobile ? 'center' : 'left',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: isMobile ? 'center' : 'flex-start',
-                gap: '12px'
-              }}>
-                {/* Minimalist Top Indicator */}
-                <div style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  color: '#38bdf8',
-                  fontSize: '0.72rem',
-                  fontWeight: '700',
-                  letterSpacing: '2.5px',
-                  textTransform: 'uppercase'
-                }}>
-                  <span className="jewel-dot" style={{ width: '6px', height: '6px' }}></span>
-                  <span>LOADING PORTFOLIO</span>
-                </div>
+              {/* LEFT: Text content — animates in after lanyard */}
+              <motion.div
+                initial={{ opacity: 0, x: -24 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 1.0, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}
+                style={{
+                  flex: '1 1 45%',
+                  maxWidth: '420px',
+                  textAlign: isMobile ? 'center' : 'left',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: isMobile ? 'center' : 'flex-start',
+                  gap: '10px'
+                }}
+              >
+                {/* Decorative thin line */}
+                <div className="loader-line-anim" style={{
+                  height: '1px',
+                  width: '50px',
+                  background: 'linear-gradient(90deg, transparent, rgba(56,189,248,0.7), transparent)',
+                  borderRadius: '9999px',
+                  marginBottom: '4px'
+                }} />
 
-                {/* Animated Name */}
+                {/* Name — Serif, lighter weight, smaller than before */}
                 <h1 style={{
-                  fontFamily: "'Plus Jakarta Sans', sans-serif",
-                  fontSize: 'clamp(2rem, 3.6vw, 3rem)',
-                  fontWeight: '800',
+                  fontFamily: "'Cormorant Garamond', 'Garamond', serif",
+                  fontSize: 'clamp(1.8rem, 3.5vw, 3rem)',
+                  fontWeight: '300',
+                  letterSpacing: '0.08em',
                   color: '#ffffff',
                   lineHeight: 1.15,
-                  margin: '4px 0 10px 0',
-                  letterSpacing: '-0.5px'
+                  margin: 0,
+                  textShadow: '0 0 50px rgba(56,189,248,0.15)'
                 }}>
-                  Rahajeng Eka <br />
-                  <span className="gradient-text-cyan" style={{ fontStyle: 'italic', fontWeight: '800' }}>
+                  Rahajeng Eka
+                  <br />
+                  <span style={{
+                    fontStyle: 'italic',
+                    fontWeight: '300',
+                    background: 'linear-gradient(135deg, #e2e8f0 0%, #38bdf8 60%, #93c5fd 100%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent'
+                  }}>
                     Wahyuningtiyas
                   </span>
                 </h1>
 
-                {/* Progress Bar & Status */}
-                <div style={{ width: '100%', maxWidth: '300px', marginTop: '6px' }}>
-                  <div style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    fontSize: '0.68rem',
-                    color: '#64748b',
-                    marginBottom: '6px',
-                    letterSpacing: '1px',
-                    fontFamily: 'monospace'
-                  }}>
-                    <span>SYSTEM READY</span>
-                    <span style={{ color: '#38bdf8', fontWeight: '700' }}>100%</span>
-                  </div>
+                {/* Profession */}
+                <p style={{
+                  fontFamily: "'Plus Jakarta Sans', sans-serif",
+                  fontSize: 'clamp(0.68rem, 1.2vw, 0.82rem)',
+                  fontWeight: '400',
+                  letterSpacing: '0.3em',
+                  color: '#64748b',
+                  textTransform: 'uppercase',
+                  marginTop: '4px'
+                }}>
+                  Software Engineer · Creative Developer
+                </p>
+
+                {/* Progress bar */}
+                <div style={{ marginTop: '28px', width: '100%', maxWidth: '220px' }}>
                   <div style={styles.loaderTrack}>
-                    <motion.div 
-                      initial={{ width: 0 }} 
-                      animate={{ width: "100%" }} 
-                      transition={{ duration: 3.0, ease: [0.16, 1, 0.3, 1] }} 
-                      style={styles.loaderFill} 
+                    <motion.div
+                      initial={{ width: 0 }}
+                      animate={{ width: '100%' }}
+                      transition={{ duration: 5.5, ease: [0.16, 1, 0.3, 1] }}
+                      style={styles.loaderFill}
                     />
                   </div>
                 </div>
 
-                {/* Enter Button */}
-                <div style={{ marginTop: '14px', display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
-                  <motion.button 
-                    whileHover={{ scale: 1.05, boxShadow: '0 8px 30px rgba(56, 189, 248, 0.5)' }} 
-                    whileTap={{ scale: 0.95 }} 
-                    onClick={() => setLoading(false)} 
-                    style={styles.loaderButton}
-                  >
-                    <span>Enter Portfolio</span>
-                    <ArrowUpRight size={15} />
-                  </motion.button>
-                  <span style={{ fontSize: '0.7rem', color: '#64748b' }}>
-                    (Klik untuk masuk)
-                  </span>
+                {/* Dots */}
+                <div style={{ display: 'flex', gap: '7px', marginTop: '16px', alignItems: 'center' }}>
+                  <div className="loader-dot-1" style={{ width: '4px', height: '4px', borderRadius: '50%', background: '#38bdf8' }} />
+                  <div className="loader-dot-2" style={{ width: '4px', height: '4px', borderRadius: '50%', background: '#60a5fa' }} />
+                  <div className="loader-dot-3" style={{ width: '4px', height: '4px', borderRadius: '50%', background: '#93c5fd' }} />
                 </div>
-              </div>
 
-              {/* Samping Kanan: 1 Lanyard Saja (React Bits 3D Lanyard) */}
+                <span style={{ marginTop: '20px', fontSize: '0.65rem', color: '#334155', letterSpacing: '1.5px', textTransform: 'uppercase' }}>
+                  Tap anywhere to skip
+                </span>
+              </motion.div>
+
+              {/* RIGHT: Lanyard — loads immediately, no delay */}
               <div style={{
                 flex: '1 1 50%',
-                maxWidth: '520px',
-                height: isMobile ? '380px' : '520px',
+                maxWidth: '480px',
+                height: isMobile ? '340px' : '500px',
                 width: '100%',
                 display: 'flex',
                 flexDirection: 'column',
@@ -401,17 +448,9 @@ function App() {
                 position: 'relative'
               }}>
                 <ReactBitsLanyard frontImage="/foto-rahajeng.webp" />
-
-                <div style={{
-                  marginTop: '6px',
-                  fontSize: '0.72rem',
-                  color: '#64748b',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '6px'
-                }}>
-                  <Sparkles size={12} color="#38bdf8" />
-                  <span>Interactive 3D badge · Drag or pull to swing</span>
+                <div style={{ marginTop: '8px', fontSize: '0.7rem', color: '#475569', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  <Sparkles size={11} color="#38bdf8" />
+                  <span>Interactive 3D · Drag to swing</span>
                 </div>
               </div>
             </div>
@@ -662,7 +701,7 @@ function App() {
               </span>
             </h2>
             <p style={styles.shortDesc}>
-              Halo, saya <b>Rahajeng Eka Wahyuningtiyas</b> — Mahasiswi Teknik Informatika Universitas Brawijaya yang berfokus pada rekayasa perangkat lunak, arsitektur web modern, dan pengembangan aplikasi mobile yang intuitif.
+              Halo, saya <b>Rahajeng Eka Wahyuningtiyas</b> — Mahasiswi Teknologi Informasi Universitas Brawijaya yang berfokus pada rekayasa perangkat lunak, arsitektur web modern, dan pengembangan aplikasi mobile yang intuitif.
               <br />
               <span style={{ fontSize: '0.82rem', color: '#94a3b8', display: 'inline-flex', alignItems: 'center', gap: '5px', marginTop: '6px' }}>
                 <Terminal size={13} color="#38bdf8" />
@@ -671,21 +710,8 @@ function App() {
               </span>
             </p>
 
-            {/* Hero CTA Group featuring Download CV */}
-            <div style={styles.heroCtaGroup}>
-              {/* DOWNLOAD CV BUTTON (Automatic download to /CV_Rahajeng.pdf) */}
-              <motion.a 
-                whileHover={{ scale: 1.04, boxShadow: '0 8px 25px rgba(56, 189, 248, 0.4)', borderColor: 'rgba(56, 189, 248, 0.7)' }} 
-                whileTap={{ scale: 0.96 }} 
-                href="/CV_Rahajeng.pdf" 
-                download="CV_Rahajeng.pdf"
-                style={styles.heroCtaCv}
-                title="Download Curriculum Vitae (PDF)"
-              >
-                <Download size={15} />
-                <span>Download CV</span>
-              </motion.a>
-
+            {/* Hero CTA Group — Curated Projects + Download CV only */}
+            <div style={styles.heroCtaGroup} className="hero-cta-group-resp">
               <motion.a 
                 whileHover={{ scale: 1.04, boxShadow: '0 6px 24px rgba(37, 99, 235, 0.45)' }} 
                 whileTap={{ scale: 0.96 }} 
@@ -696,14 +722,17 @@ function App() {
                 <ArrowUpRight size={15} />
               </motion.a>
 
+              {/* DOWNLOAD CV BUTTON */}
               <motion.a 
-                whileHover={{ scale: 1.04, borderColor: 'rgba(56, 189, 248, 0.4)' }} 
+                whileHover={{ scale: 1.04, boxShadow: '0 8px 25px rgba(56, 189, 248, 0.4)', borderColor: 'rgba(56, 189, 248, 0.7)' }} 
                 whileTap={{ scale: 0.96 }} 
-                href="#skills" 
-                style={styles.heroCtaSecondary}
+                href="/CV_Rahajeng.pdf" 
+                download="CV_Rahajeng.pdf"
+                style={styles.heroCtaCv}
+                title="Download Curriculum Vitae (PDF)"
               >
-                <Cpu size={14} />
-                <span>Tech & Tools</span>
+                <Download size={15} />
+                <span>Download CV</span>
               </motion.a>
             </div>
           </motion.div>
@@ -753,7 +782,7 @@ function App() {
             <ProjectCard 
               title="Smart Oryza Platform" 
               tags={["Laravel", "Flutter", "Agri-Tech", "IoT"]} 
-              desc="Platform ekosistem komprehensif mengintegrasikan portal analitik web & mobile dashboard untuk efisiensi rantai pasok agrikultur pangan." 
+              desc="Admin dashboard agrikultur yang terkoneksi langsung ke perangkat IoT — mengintegrasikan pemantauan sensor real-time, analitik web, dan mobile dashboard untuk efisiensi rantai pasok pangan." 
               link="http://smartoryza.site" 
               image="/project-smartoryza.png" 
               category="Web & Mobile System"
@@ -780,13 +809,17 @@ function App() {
               title="Pintar Ceria — Web Edu" 
               tags={["Native PHP", "UI/UX", "Interactive", "Education"]} 
               desc="Platform pembelajaran digital gamified dengan antarmuka child-friendly yang interaktif, intuitif, dan responsif untuk siswa Sekolah Dasar." 
+              link="https://github.com/rahajengeka/Pintar-Ceria"
+              linkText="View Repository"
               image="/project-edukasi.png" 
               category="Interactive Learning"
             />
             <ProjectCard 
               title="Tatik Catering System" 
-              tags={["Web Dev", "Culinary Commerce", "Information System"]} 
-              desc="Sistem katalog kuliner modern yang dilengkapi fitur kalkulator estimasi pesanan katering dan alur reservasi pesanan terpadu." 
+              tags={["Laravel", "Web Dev", "Culinary Commerce", "Information System"]} 
+              desc="Sistem katalog kuliner modern berbasis Laravel yang dilengkapi fitur kalkulator estimasi pesanan katering dan alur reservasi pesanan terpadu." 
+              link="https://tatik-catering-web.vercel.app/"
+              linkText="Visit Website"
               image="/project-catering.png" 
               category="Bespoke Information System"
             />
@@ -813,42 +846,53 @@ function App() {
             <div style={styles.titleDivider}></div>
           </motion.div>
 
-          <div style={styles.skillsWrapper}>
+          <div style={styles.skillsWrapper} className="skills-wrap-responsive">
             {/* Tech Stack */}
             <motion.div 
               initial={{ opacity: 0, x: -35 }} 
               whileInView={{ opacity: 1, x: 0 }} 
               viewport={{ once: false, amount: 0.15 }} 
               transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }} 
-              style={styles.skillBox}
             >
-              <div style={styles.skillBoxHeader}>
-                <div style={styles.skillBoxIconBadge}>
-                  <Code2 size={22} />
+              <BorderGlow
+                style={styles.skillBox}
+                borderRadius="26px"
+                glowColor="#38bdf8"
+                glowColor2="#6366f1"
+                glowRadius={240}
+                glowIntensity={0.75}
+                borderWidth={1}
+              >
+                <div style={{ ...styles.skillBox, border: 'none', boxShadow: 'none' }}>
+                  <div style={styles.skillBoxHeader}>
+                    <div style={styles.skillBoxIconBadge}>
+                      <Code2 size={22} />
+                    </div>
+                    <h3 style={styles.skillBoxTitle}>Frontend &amp; Engineering Stack</h3>
+                  </div>
+                  <div style={styles.skillTags}>
+                    {[
+                      { name: "React.js" },
+                      { name: "Flutter" },
+                      { name: "Laravel" },
+                      { name: "JavaScript ESNext" },
+                      { name: "PHP OOP" },
+                      { name: "Tailwind CSS" },
+                      { name: "HTML5 / CSS3" },
+                      { name: "Git & GitHub" }
+                    ].map(skill => (
+                      <motion.span 
+                        key={skill.name} 
+                        whileHover={{ scale: 1.05, borderColor: 'rgba(56,189,248,0.5)', color: '#38bdf8' }} 
+                        style={styles.skillTag}
+                      >
+                        <span className="blue-dot"></span>
+                        {skill.name}
+                      </motion.span>
+                    ))}
+                  </div>
                 </div>
-                <h3 style={styles.skillBoxTitle}>Frontend & Engineering Stack</h3>
-              </div>
-              <div style={styles.skillTags}>
-                {[
-                  { name: "React.js" },
-                  { name: "Flutter" },
-                  { name: "Laravel" },
-                  { name: "JavaScript ESNext" },
-                  { name: "PHP OOP" },
-                  { name: "Tailwind CSS" },
-                  { name: "HTML5 / CSS3" },
-                  { name: "Git & GitHub" }
-                ].map(skill => (
-                  <motion.span 
-                    key={skill.name} 
-                    whileHover={{ scale: 1.05, borderColor: 'rgba(56,189,248,0.5)', color: '#38bdf8' }} 
-                    style={styles.skillTag}
-                  >
-                    <span className="blue-dot"></span>
-                    {skill.name}
-                  </motion.span>
-                ))}
-              </div>
+              </BorderGlow>
             </motion.div>
 
             {/* Design & Tools */}
@@ -857,33 +901,44 @@ function App() {
               whileInView={{ opacity: 1, x: 0 }} 
               viewport={{ once: false, amount: 0.15 }} 
               transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }} 
-              style={styles.skillBox}
             >
-              <div style={styles.skillBoxHeader}>
-                <div style={styles.skillBoxIconBadge}>
-                  <Palette size={22} />
+              <BorderGlow
+                style={styles.skillBox}
+                borderRadius="26px"
+                glowColor="#38bdf8"
+                glowColor2="#6366f1"
+                glowRadius={240}
+                glowIntensity={0.75}
+                borderWidth={1}
+              >
+                <div style={{ ...styles.skillBox, border: 'none', boxShadow: 'none' }}>
+                  <div style={styles.skillBoxHeader}>
+                    <div style={styles.skillBoxIconBadge}>
+                      <Palette size={22} />
+                    </div>
+                    <h3 style={styles.skillBoxTitle}>UI/UX Design &amp; Productivity Tools</h3>
+                  </div>
+                  <div style={styles.skillTags}>
+                    {[
+                      { name: "Figma Prototyping" },
+                      { name: "UI/UX Wireframing" },
+                      { name: "Design Systems" },
+                      { name: "Canva Pro" },
+                      { name: "CapCut Studio" },
+                      { name: "VS Code" }
+                    ].map(skill => (
+                      <motion.span 
+                        key={skill.name} 
+                        whileHover={{ scale: 1.05, borderColor: 'rgba(56,189,248,0.5)', color: '#38bdf8' }} 
+                        style={styles.skillTag}
+                      >
+                        <span className="blue-dot"></span>
+                        {skill.name}
+                      </motion.span>
+                    ))}
+                  </div>
                 </div>
-                <h3 style={styles.skillBoxTitle}>UI/UX Design & Productivity Tools</h3>
-              </div>
-              <div style={styles.skillTags}>
-                {[
-                  { name: "Figma Prototyping" },
-                  { name: "UI/UX Wireframing" },
-                  { name: "Design Systems" },
-                  { name: "Canva Pro" },
-                  { name: "CapCut Studio" },
-                  { name: "VS Code" }
-                ].map(skill => (
-                  <motion.span 
-                    key={skill.name} 
-                    whileHover={{ scale: 1.05, borderColor: 'rgba(56,189,248,0.5)', color: '#38bdf8' }} 
-                    style={styles.skillTag}
-                  >
-                    <span className="blue-dot"></span>
-                    {skill.name}
-                  </motion.span>
-                ))}
-              </div>
+              </BorderGlow>
             </motion.div>
           </div>
         </section>
@@ -910,7 +965,7 @@ function App() {
               Tertarik mendiskusikan peluang kolaborasi, proyek rekayasa perangkat lunak, atau pengembangan antarmuka UI/UX? Silakan hubungi saya melalui kanal di bawah.
             </p>
 
-            <div style={styles.contactActions}>
+            <div style={styles.contactActions} className="contact-actions-resp">
               <motion.button 
                 whileHover={{ scale: 1.04, boxShadow: '0 8px 30px rgba(56, 189, 248, 0.45)' }} 
                 whileTap={{ scale: 0.96 }} 
@@ -945,7 +1000,7 @@ function App() {
               </motion.a>
             </div>
 
-            <div style={styles.socialLinks}>
+            <div style={styles.socialLinks} className="social-links-resp">
               <motion.a 
                 whileHover={{ y: -4, borderColor: 'rgba(56, 189, 248, 0.4)', color: '#38bdf8' }} 
                 href="https://www.linkedin.com/in/rahajeng-eka-a18b7b320" 
@@ -968,7 +1023,7 @@ function App() {
               </motion.a>
             </div>
 
-            <div style={styles.copyright}>
+            <div style={{ ...styles.copyright, marginTop: '48px', paddingTop: '28px', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
               <p>© 2026 Rahajeng Eka Wahyuningtiyas · All rights reserved.</p>
               <p style={{ marginTop: '4px', fontSize: '0.72rem', color: '#475569' }}>
                 Built with React, Three.js & Framer Motion
@@ -1002,50 +1057,59 @@ function App() {
 // Subcomponent: Project Card
 function ProjectCard({ title, tags, desc, link, linkText, image, category }) {
   return (
-    <motion.div 
-      variants={itemVariants} 
-      style={styles.card} 
-      className="card-project"
-    >
-      <div style={styles.cardTop}>
-        <img 
-          src={image} 
-          alt={title} 
-          style={styles.cardImage} 
-          className="project-img" 
-        />
-        <div style={styles.cardOverlay}></div>
-      </div>
-      <div style={styles.cardBody}>
-        <div style={styles.cardTagGroup}>
-          {tags.map(t => (
-            <span key={t} style={styles.cardTag}>{t}</span>
-          ))}
+    <motion.div variants={itemVariants} style={{ height: '100%' }}>
+      <BorderGlow
+        style={{ ...styles.card, height: '100%', animation: 'none' }}
+        className="card-project"
+        borderRadius={styles.card.borderRadius || '20px'}
+        glowColor="#38bdf8"
+        glowColor2="#3b82f6"
+        glowRadius={220}
+        glowIntensity={0.85}
+        borderWidth={1}
+      >
+        <div style={{ ...styles.card, border: 'none', boxShadow: 'none', height: '100%' }}>
+          <div style={styles.cardTop}>
+            <img 
+              src={image} 
+              alt={title} 
+              style={styles.cardImage} 
+              className="project-img" 
+            />
+            <div style={styles.cardOverlay}></div>
+          </div>
+          <div style={styles.cardBody}>
+            <div style={styles.cardTagGroup}>
+              {tags.map(t => (
+                <span key={t} style={styles.cardTag}>{t}</span>
+              ))}
+            </div>
+            <h3 style={styles.cardTitle}>{title}</h3>
+            <p style={styles.cardDesc}>{desc}</p>
+            <div style={styles.cardFooter}>
+              {link ? (
+                <a 
+                  href={link} 
+                  target="_blank" 
+                  rel="noreferrer" 
+                  style={styles.cardLink}
+                >
+                  <span>{linkText || (link.includes('github.com') ? 'View Repository' : 'Explore Platform')}</span>
+                  <ArrowUpRight size={15} color="#38bdf8" />
+                </a>
+              ) : (
+                <span style={styles.cardLinkDisabled}>
+                  <span className="blue-dot"></span>
+                  <span>Case Study / Local Repo</span>
+                </span>
+              )}
+              <span style={{ fontSize: '0.72rem', color: '#64748b', letterSpacing: '0.8px', textTransform: 'uppercase' }}>
+                {category}
+              </span>
+            </div>
+          </div>
         </div>
-        <h3 style={styles.cardTitle}>{title}</h3>
-        <p style={styles.cardDesc}>{desc}</p>
-        <div style={styles.cardFooter}>
-          {link ? (
-            <a 
-              href={link} 
-              target="_blank" 
-              rel="noreferrer" 
-              style={styles.cardLink}
-            >
-              <span>{linkText || (link.includes('github.com') ? 'View Repository' : 'Explore Platform')}</span>
-              <ArrowUpRight size={15} color="#38bdf8" />
-            </a>
-          ) : (
-            <span style={styles.cardLinkDisabled}>
-              <span className="blue-dot"></span>
-              <span>Case Study / Local Repo</span>
-            </span>
-          )}
-          <span style={{ fontSize: '0.72rem', color: '#64748b', letterSpacing: '0.8px', textTransform: 'uppercase' }}>
-            {category}
-          </span>
-        </div>
-      </div>
+      </BorderGlow>
     </motion.div>
   );
 }

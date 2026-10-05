@@ -68,6 +68,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
   line-height: 1.6;
+  cursor: none;
+}
+
+/* Hide default cursor on all interactive elements (custom cursor handles it) */
+a, button, [role="button"], input, textarea, select, label {
+  cursor: none !important;
 }
 
 ::selection {
@@ -220,9 +226,7 @@ body {
   }
 }
 
-/* Touch & Mobile Optimizations */
+/* Touch & Mobile — show native cursor */
 @media (hover: none) and (pointer: coarse) {
-  .custom-cursor, .custom-cursor-dot {
-    display: none !important;
-  }
+  body { cursor: auto !important; }
 }
