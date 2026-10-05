@@ -15,8 +15,10 @@ export const styles = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    flexDirection: 'column',
-    overflow: 'hidden'
+    overflowY: 'auto',
+    overflowX: 'hidden',
+    padding: '24px',
+    boxSizing: 'border-box'
   },
   loaderContent: {
     textAlign: 'center',
@@ -60,9 +62,26 @@ export const styles = {
     color: '#94a3b8',
     fontSize: '0.72rem',
     marginTop: '16px',
-    letterSpacing: '3px',
+    letterSpacing: '2px',
     textTransform: 'uppercase',
     fontWeight: '600'
+  },
+  loaderButton: {
+    marginTop: '18px',
+    background: 'linear-gradient(135deg, #2563eb 0%, #38bdf8 100%)',
+    color: '#ffffff',
+    border: 'none',
+    padding: '10px 24px',
+    borderRadius: '9999px',
+    fontSize: '0.82rem',
+    fontWeight: '700',
+    letterSpacing: '0.6px',
+    cursor: 'pointer',
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '8px',
+    boxShadow: '0 8px 25px rgba(37, 99, 235, 0.45)',
+    transition: 'all 0.3s ease'
   },
 
   // Main Page Structure
@@ -335,6 +354,25 @@ export const styles = {
     alignItems: 'center',
     gap: '8px',
     boxShadow: '0 6px 24px rgba(37, 99, 235, 0.45)',
+    transition: 'all 0.3s ease'
+  },
+  heroCtaCv: {
+    background: 'linear-gradient(135deg, rgba(37, 99, 235, 0.18) 0%, rgba(56, 189, 248, 0.18) 100%)',
+    color: '#38bdf8',
+    padding: '11px 22px',
+    borderRadius: '9999px',
+    fontSize: '0.82rem',
+    fontWeight: '700',
+    letterSpacing: '0.5px',
+    textDecoration: 'none',
+    border: '1px solid rgba(56, 189, 248, 0.45)',
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '8px',
+    boxShadow: '0 4px 16px rgba(0, 0, 0, 0.3)',
+    backdropFilter: 'blur(12px)',
+    WebkitBackdropFilter: 'blur(12px)',
+    cursor: 'pointer',
     transition: 'all 0.3s ease'
   },
   heroCtaSecondary: {
