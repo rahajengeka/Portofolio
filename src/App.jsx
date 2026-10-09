@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useScroll, useSpring, useTransform } from 'framer-motion';
-import { 
-  Sparkles, 
-  Mail, 
-  ArrowUp, 
-  ArrowUpRight, 
-  Code2, 
-  Palette, 
-  Copy, 
-  Check, 
-  Clock, 
-  Menu, 
+import {
+  Sparkles,
+  Mail,
+  ArrowUp,
+  ArrowUpRight,
+  Code2,
+  Palette,
+  Copy,
+  Check,
+  Clock,
+  Menu,
   X,
   Cpu,
   Download,
@@ -25,18 +25,18 @@ import CustomCursor from './components/CustomCursor';
 
 const containerVariants = {
   hidden: { opacity: 0 },
-  visible: { 
-    opacity: 1, 
-    transition: { staggerChildren: 0.15, delayChildren: 0.1 } 
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.15, delayChildren: 0.1 }
   }
 };
 
 const itemVariants = {
   hidden: { opacity: 0, y: 24 },
-  visible: { 
-    opacity: 1, 
-    y: 0, 
-    transition: { duration: 0.65, ease: [0.16, 1, 0.3, 1] } 
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.65, ease: [0.16, 1, 0.3, 1] }
   }
 };
 
@@ -52,10 +52,11 @@ function App() {
 
   // Typewriter effect phrases
   const words = [
-    "Frontend Engineering.",
-    "Cross-Platform Mobile.",
-    "UI/UX Precision Systems.",
-    "Clean Code Architecture."
+    "React & Vite.",
+    "Flutter & Dart.",
+    "Laravel & PHP.",
+    "Next.js.",
+    "Clean Architecture."
   ];
   const [wordIdx, setWordIdx] = useState(0);
   const [subText, setSubText] = useState('');
@@ -117,14 +118,14 @@ function App() {
 
   // General listeners & responsive check
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 6000);
-    const checkDevice = () => { 
-      setIsMobile(window.innerWidth <= 890); 
+    const timer = setTimeout(() => setLoading(false), 5000);
+    const checkDevice = () => {
+      setIsMobile(window.innerWidth <= 890);
     };
     checkDevice();
 
-    const handleMouseMove = (e) => { 
-      setMousePos({ x: e.clientX, y: e.clientY }); 
+    const handleMouseMove = (e) => {
+      setMousePos({ x: e.clientX, y: e.clientY });
     };
     const handleScroll = () => {
       setShowScroll(window.scrollY > 400);
@@ -149,8 +150,8 @@ function App() {
     setTimeout(() => setCopiedEmail(false), 2800);
   };
 
-  const scrollToTop = () => { 
-    window.scrollTo({ top: 0, behavior: 'smooth' }); 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -417,7 +418,7 @@ function App() {
                     <motion.div
                       initial={{ width: 0 }}
                       animate={{ width: '100%' }}
-                      transition={{ duration: 5.5, ease: [0.16, 1, 0.3, 1] }}
+                      transition={{ duration: 3.0, ease: [0.16, 1, 0.3, 1] }}
                       style={styles.loaderFill}
                     />
                   </div>
@@ -439,8 +440,9 @@ function App() {
               <div style={{
                 flex: '1 1 50%',
                 maxWidth: '480px',
-                height: isMobile ? '340px' : '500px',
+                height: isMobile ? 'clamp(380px, 85vw, 500px)' : '500px',
                 width: '100%',
+                maxWidth: isMobile ? '100%' : '480px',
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
@@ -511,14 +513,14 @@ function App() {
         </div>
 
         {/* Floating Navigation Pill */}
-        <motion.header 
-          initial={{ y: -60, opacity: 0 }} 
-          animate={{ y: 0, opacity: 1 }} 
-          transition={{ duration: 0.9, delay: 0.4, ease: [0.16, 1, 0.3, 1] }} 
+        <motion.header
+          initial={{ y: -60, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.9, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
           style={styles.header}
         >
-          <a 
-            href="#home" 
+          <a
+            href="#home"
             style={styles.logoContainer}
             onMouseEnter={() => setCursorHovered(true)}
             onMouseLeave={() => setCursorHovered(false)}
@@ -532,10 +534,10 @@ function App() {
             <a href="#about" style={styles.navLink} className="nav-item-link">About Me</a>
             <a href="#portfolio" style={styles.navLink} className="nav-item-link">Projects</a>
             <a href="#skills" style={styles.navLink} className="nav-item-link">Tech & Tools</a>
-            <motion.a 
-              whileHover={{ scale: 1.04, boxShadow: '0 6px 24px rgba(56, 189, 248, 0.45)' }} 
-              whileTap={{ scale: 0.96 }} 
-              href="#contact" 
+            <motion.a
+              whileHover={{ scale: 1.04, boxShadow: '0 6px 24px rgba(56, 189, 248, 0.45)' }}
+              whileTap={{ scale: 0.96 }}
+              href="#contact"
               style={styles.navLinkContact}
             >
               <Sparkles size={14} />
@@ -589,34 +591,34 @@ function App() {
               }}
               className="mobile-nav-drawer"
             >
-              <a 
-                href="#about" 
+              <a
+                href="#about"
                 onClick={() => setMobileMenuOpen(false)}
                 style={{ color: '#fff', textDecoration: 'none', fontSize: '1rem', letterSpacing: '1px' }}
               >
                 About Me
               </a>
-              <a 
-                href="#portfolio" 
+              <a
+                href="#portfolio"
                 onClick={() => setMobileMenuOpen(false)}
                 style={{ color: '#fff', textDecoration: 'none', fontSize: '1rem', letterSpacing: '1px' }}
               >
                 Projects
               </a>
-              <a 
-                href="#skills" 
+              <a
+                href="#skills"
                 onClick={() => setMobileMenuOpen(false)}
                 style={{ color: '#fff', textDecoration: 'none', fontSize: '1rem', letterSpacing: '1px' }}
               >
                 Tech & Tools
               </a>
-              <a 
-                href="#contact" 
+              <a
+                href="#contact"
                 onClick={() => setMobileMenuOpen(false)}
-                style={{ 
-                  ...styles.navLinkContact, 
-                  justifyContent: 'center', 
-                  marginTop: '10px' 
+                style={{
+                  ...styles.navLinkContact,
+                  justifyContent: 'center',
+                  marginTop: '10px'
                 }}
               >
                 Let's Connect
@@ -630,14 +632,14 @@ function App() {
           <div id="home" style={{ position: 'absolute', top: 0 }} />
           <div style={styles.heroAmbientAura}></div>
           <div style={styles.heroBlurBg}></div>
-          
+
           {/* Subtle Parallax Editorial Backdrop */}
-          <motion.h1 
+          <motion.h1
             className="bg-backdrop-text"
-            style={{ 
-              ...styles.bgBackdropText, 
-              scale: bgTextScale, 
-              opacity: bgTextOpacity 
+            style={{
+              ...styles.bgBackdropText,
+              scale: bgTextScale,
+              opacity: bgTextOpacity
             }}
           >
             {"Portfolio"}
@@ -647,7 +649,7 @@ function App() {
           <div style={styles.heroImageWrapper} className="hero-img-wrap">
             <div style={styles.heroPortraitGlow}></div>
             {!loading && (
-              <motion.img 
+              <motion.img
                 style={{
                   ...styles.heroImage,
                   scale: parallaxImageScale,
@@ -656,42 +658,42 @@ function App() {
                 initial={{ opacity: 0, scale: 0.96, y: 30 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-                src="/foto-rahajeng.webp" 
-                alt="Rahajeng Eka Wahyuningtiyas" 
+                src="/foto-rahajeng.webp"
+                alt="Rahajeng Eka Wahyuningtiyas"
                 className="hero-image"
               />
             )}
           </div>
 
           {/* Floating Badges */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            style={styles.infoTopLeft} 
+            style={styles.infoTopLeft}
             className="info-pos-static"
           >
             <Sparkles size={14} color="#38bdf8" />
             <span>Software Engineer & Creative Technologist</span>
           </motion.div>
-          
-          <motion.div 
+
+          <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            style={styles.infoTopRight} 
+            style={styles.infoTopRight}
             className="info-pos-static"
           >
             <span className="jewel-dot"></span>
             <span>AVAILABLE FOR OPPORTUNITIES</span>
           </motion.div>
-          
+
           {/* Bottom Left Intro & CTA */}
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }} 
-            animate={{ opacity: 1, y: 0 }} 
-            transition={{ duration: 0.8, delay: 0.8 }} 
-            style={styles.infoBottomLeft} 
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
+            style={styles.infoBottomLeft}
             className="info-pos-static"
           >
             <h2 style={styles.heroLeadTitle}>
@@ -701,21 +703,22 @@ function App() {
               </span>
             </h2>
             <p style={styles.shortDesc}>
-              Halo, saya <b>Rahajeng Eka Wahyuningtiyas</b> — Mahasiswi Teknologi Informasi Universitas Brawijaya yang berfokus pada rekayasa perangkat lunak, arsitektur web modern, dan pengembangan aplikasi mobile yang intuitif.
-              <br />
-              <span style={{ fontSize: '0.82rem', color: '#94a3b8', display: 'inline-flex', alignItems: 'center', gap: '5px', marginTop: '6px' }}>
-                <Terminal size={13} color="#38bdf8" />
-                Focus: <span style={{ color: '#38bdf8', fontWeight: '600' }}>{subText}</span>
-                <span style={{ color: '#38bdf8', fontWeight: 'bold' }}>|</span>
+              Halo, saya <b>Rahajeng Eka Wahyuningtiyas</b> — Software Engineer &amp; Frontend Developer dari Universitas Brawijaya, yang fokus membangun aplikasi web modern, antarmuka yang intuitif, dan sistem mobile cross-platform.
+            </p>
+            <p style={{ ...styles.shortDesc, marginTop: '6px', display: 'flex', alignItems: 'baseline', flexWrap: 'wrap', gap: '4px' }}>
+              Currently building with{' '}
+              <span style={{ color: '#38bdf8', fontWeight: '700' }}>
+                {subText}
               </span>
+              <span style={{ color: '#38bdf8', fontWeight: 'bold', lineHeight: 1 }}>|</span>
             </p>
 
             {/* Hero CTA Group — Curated Projects + Download CV only */}
             <div style={styles.heroCtaGroup} className="hero-cta-group-resp">
-              <motion.a 
-                whileHover={{ scale: 1.04, boxShadow: '0 6px 24px rgba(37, 99, 235, 0.45)' }} 
-                whileTap={{ scale: 0.96 }} 
-                href="#portfolio" 
+              <motion.a
+                whileHover={{ scale: 1.04, boxShadow: '0 6px 24px rgba(37, 99, 235, 0.45)' }}
+                whileTap={{ scale: 0.96 }}
+                href="#portfolio"
                 style={styles.heroCtaPrimary}
               >
                 <span>Curated Projects</span>
@@ -723,10 +726,10 @@ function App() {
               </motion.a>
 
               {/* DOWNLOAD CV BUTTON */}
-              <motion.a 
-                whileHover={{ scale: 1.04, boxShadow: '0 8px 25px rgba(56, 189, 248, 0.4)', borderColor: 'rgba(56, 189, 248, 0.7)' }} 
-                whileTap={{ scale: 0.96 }} 
-                href="/CV_Rahajeng.pdf" 
+              <motion.a
+                whileHover={{ scale: 1.04, boxShadow: '0 8px 25px rgba(56, 189, 248, 0.4)', borderColor: 'rgba(56, 189, 248, 0.7)' }}
+                whileTap={{ scale: 0.96 }}
+                href="/CV_Rahajeng.pdf"
                 download="CV_Rahajeng.pdf"
                 style={styles.heroCtaCv}
                 title="Download Curriculum Vitae (PDF)"
@@ -738,11 +741,11 @@ function App() {
           </motion.div>
 
           {/* Bottom Right Location & Time */}
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }} 
-            animate={{ opacity: 1, y: 0 }} 
-            transition={{ duration: 0.8, delay: 0.8 }} 
-            style={styles.infoBottomRight} 
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
+            style={styles.infoBottomRight}
             className="info-pos-static"
           >
             <span style={styles.locationLabel}>Malang, Indonesia</span>
@@ -754,11 +757,11 @@ function App() {
 
         {/* 2. SECTION: SELECTED WORKS / PROJECTS */}
         <section id="portfolio" style={styles.section}>
-          <motion.div 
-            initial={{ opacity: 0, y: 40 }} 
-            whileInView={{ opacity: 1, y: 0 }} 
-            viewport={{ once: false, amount: 0.15 }} 
-            transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }} 
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.15 }}
+            transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
             style={styles.sectionHeader}
           >
             <span style={styles.sectionEyebrow}>
@@ -772,55 +775,55 @@ function App() {
             <div style={styles.titleDivider}></div>
           </motion.div>
 
-          <motion.div 
-            variants={containerVariants} 
-            initial="hidden" 
-            whileInView="visible" 
-            viewport={{ once: false, amount: 0.08 }} 
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.08 }}
             style={styles.portfolioGrid}
           >
-            <ProjectCard 
-              title="Smart Oryza Platform" 
-              tags={["Laravel", "Flutter", "Agri-Tech", "IoT"]} 
-              desc="Admin dashboard agrikultur yang terkoneksi langsung ke perangkat IoT — mengintegrasikan pemantauan sensor real-time, analitik web, dan mobile dashboard untuk efisiensi rantai pasok pangan." 
-              link="http://smartoryza.site" 
-              image="/project-smartoryza.png" 
+            <ProjectCard
+              title="Smart Oryza Platform"
+              tags={["Laravel", "Flutter", "Agri-Tech", "IoT"]}
+              desc="Admin dashboard agrikultur yang terkoneksi langsung ke perangkat IoT — mengintegrasikan pemantauan sensor real-time, analitik web, dan mobile dashboard untuk efisiensi rantai pasok pangan."
+              link="http://smartoryza.site"
+              image="/project-smartoryza.png"
               category="Web & Mobile System"
             />
-            <ProjectCard 
-              title="SIMIKP — Diskominfo Kota Batu" 
-              tags={["React", "Web App", "E-Government", "Public Comm"]} 
-              desc="Sistem Informasi Manajemen Informasi dan Komunikasi Publik (SIMIKP) untuk Diskominfo Kota Batu guna sentralisasi data informasi kedinasan dan portal dashboard terpadu." 
-              link="https://simikp.onrender.com/login" 
-              linkText="Visit Portal" 
-              image="/project-simikp.png" 
+            <ProjectCard
+              title="SIMIKP — Diskominfo Kota Batu"
+              tags={["React", "Web App", "E-Government", "Public Comm"]}
+              desc="Sistem Informasi Manajemen Informasi dan Komunikasi Publik (SIMIKP) untuk Diskominfo Kota Batu guna sentralisasi data informasi kedinasan dan portal dashboard terpadu."
+              link="https://simikp.onrender.com/login"
+              linkText="Visit Portal"
+              image="/project-simikp.png"
               category="E-Government System"
             />
-            <ProjectCard 
-              title="SIA Sekolah — Platform Akademik" 
-              tags={["Flutter", "Dart", "Multi-Role", "Academic System"]} 
-              desc="Sistem Informasi Akademik sekolah terpadu berbasis Flutter untuk administrasi, rekapitulasi penilaian Kurikulum Merdeka, statistik & rapor digital, serta sinkronisasi multi-role." 
-              link="https://github.com/rahajengeka/sia_sekolah" 
+            <ProjectCard
+              title="SIA Sekolah — Platform Akademik"
+              tags={["Flutter", "Dart", "Multi-Role", "Academic System"]}
+              desc="Sistem Informasi Akademik sekolah terpadu berbasis Flutter untuk administrasi, rekapitulasi penilaian Kurikulum Merdeka, statistik & rapor digital, serta sinkronisasi multi-role."
+              link="https://github.com/rahajengeka/sia_sekolah"
               linkText="View Repository"
-              image="/project-siasekolah.png" 
+              image="/project-siasekolah.png"
               category="Cross-Platform System"
             />
-            <ProjectCard 
-              title="Pintar Ceria — Web Edu" 
-              tags={["Native PHP", "UI/UX", "Interactive", "Education"]} 
-              desc="Platform pembelajaran digital gamified dengan antarmuka child-friendly yang interaktif, intuitif, dan responsif untuk siswa Sekolah Dasar." 
+            <ProjectCard
+              title="Pintar Ceria — Web Edu"
+              tags={["Native PHP", "UI/UX", "Interactive", "Education"]}
+              desc="Platform pembelajaran digital gamified dengan antarmuka child-friendly yang interaktif, intuitif, dan responsif untuk siswa Sekolah Dasar."
               link="https://github.com/rahajengeka/Pintar-Ceria"
               linkText="View Repository"
-              image="/project-edukasi.png" 
+              image="/project-edukasi.png"
               category="Interactive Learning"
             />
-            <ProjectCard 
-              title="Tatik Catering System" 
-              tags={["Laravel", "Web Dev", "Culinary Commerce", "Information System"]} 
-              desc="Sistem katalog kuliner modern berbasis Laravel yang dilengkapi fitur kalkulator estimasi pesanan katering dan alur reservasi pesanan terpadu." 
+            <ProjectCard
+              title="Tatik Catering System"
+              tags={["Laravel", "Web Dev", "Culinary Commerce", "Information System"]}
+              desc="Sistem katalog kuliner modern berbasis Laravel yang dilengkapi fitur kalkulator estimasi pesanan katering dan alur reservasi pesanan terpadu."
               link="https://tatik-catering-web.vercel.app/"
               linkText="Visit Website"
-              image="/project-catering.png" 
+              image="/project-catering.png"
               category="Bespoke Information System"
             />
           </motion.div>
@@ -828,11 +831,11 @@ function App() {
 
         {/* 3. SECTION: TECH TOOLS & COMPETENCIES */}
         <section id="skills" style={styles.section}>
-          <motion.div 
-            initial={{ opacity: 0, y: 35 }} 
-            whileInView={{ opacity: 1, y: 0 }} 
-            viewport={{ once: false, amount: 0.15 }} 
-            transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }} 
+          <motion.div
+            initial={{ opacity: 0, y: 35 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.15 }}
+            transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
             style={styles.sectionHeader}
           >
             <span style={styles.sectionEyebrow}>
@@ -848,11 +851,11 @@ function App() {
 
           <div style={styles.skillsWrapper} className="skills-wrap-responsive">
             {/* Tech Stack */}
-            <motion.div 
-              initial={{ opacity: 0, x: -35 }} 
-              whileInView={{ opacity: 1, x: 0 }} 
-              viewport={{ once: false, amount: 0.15 }} 
-              transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }} 
+            <motion.div
+              initial={{ opacity: 0, x: -35 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: false, amount: 0.15 }}
+              transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
             >
               <BorderGlow
                 style={styles.skillBox}
@@ -881,9 +884,9 @@ function App() {
                       { name: "HTML5 / CSS3" },
                       { name: "Git & GitHub" }
                     ].map(skill => (
-                      <motion.span 
-                        key={skill.name} 
-                        whileHover={{ scale: 1.05, borderColor: 'rgba(56,189,248,0.5)', color: '#38bdf8' }} 
+                      <motion.span
+                        key={skill.name}
+                        whileHover={{ scale: 1.05, borderColor: 'rgba(56,189,248,0.5)', color: '#38bdf8' }}
                         style={styles.skillTag}
                       >
                         <span className="blue-dot"></span>
@@ -896,11 +899,11 @@ function App() {
             </motion.div>
 
             {/* Design & Tools */}
-            <motion.div 
-              initial={{ opacity: 0, x: 35 }} 
-              whileInView={{ opacity: 1, x: 0 }} 
-              viewport={{ once: false, amount: 0.15 }} 
-              transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }} 
+            <motion.div
+              initial={{ opacity: 0, x: 35 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: false, amount: 0.15 }}
+              transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
             >
               <BorderGlow
                 style={styles.skillBox}
@@ -927,9 +930,9 @@ function App() {
                       { name: "CapCut Studio" },
                       { name: "VS Code" }
                     ].map(skill => (
-                      <motion.span 
-                        key={skill.name} 
-                        whileHover={{ scale: 1.05, borderColor: 'rgba(56,189,248,0.5)', color: '#38bdf8' }} 
+                      <motion.span
+                        key={skill.name}
+                        whileHover={{ scale: 1.05, borderColor: 'rgba(56,189,248,0.5)', color: '#38bdf8' }}
                         style={styles.skillTag}
                       >
                         <span className="blue-dot"></span>
@@ -945,10 +948,10 @@ function App() {
 
         {/* 4. FOOTER & CONTACT */}
         <footer id="contact" style={styles.footer}>
-          <motion.div 
-            initial={{ opacity: 0, y: 35 }} 
-            whileInView={{ opacity: 1, y: 0 }} 
-            viewport={{ once: false, amount: 0.15 }} 
+          <motion.div
+            initial={{ opacity: 0, y: 35 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.15 }}
             style={styles.contactBox}
           >
             <span style={styles.sectionEyebrow}>
@@ -966,20 +969,20 @@ function App() {
             </p>
 
             <div style={styles.contactActions} className="contact-actions-resp">
-              <motion.button 
-                whileHover={{ scale: 1.04, boxShadow: '0 8px 30px rgba(56, 189, 248, 0.45)' }} 
-                whileTap={{ scale: 0.96 }} 
-                onClick={handleCopyEmail} 
+              <motion.button
+                whileHover={{ scale: 1.04, boxShadow: '0 8px 30px rgba(56, 189, 248, 0.45)' }}
+                whileTap={{ scale: 0.96 }}
+                onClick={handleCopyEmail}
                 style={styles.emailCopyBtn}
               >
                 {copiedEmail ? <Check size={16} /> : <Copy size={16} />}
                 <span>{copiedEmail ? "Email Copied!" : "Copy Email Address"}</span>
               </motion.button>
 
-              <motion.a 
-                whileHover={{ scale: 1.04, borderColor: 'rgba(56, 189, 248, 0.5)' }} 
-                whileTap={{ scale: 0.96 }} 
-                href="mailto:rahajengg29@gmail.com" 
+              <motion.a
+                whileHover={{ scale: 1.04, borderColor: 'rgba(56, 189, 248, 0.5)' }}
+                whileTap={{ scale: 0.96 }}
+                href="mailto:rahajengg29@gmail.com"
                 style={styles.directMailLink}
               >
                 <Mail size={16} color="#38bdf8" />
@@ -987,10 +990,10 @@ function App() {
               </motion.a>
 
               {/* Download CV button in Footer */}
-              <motion.a 
-                whileHover={{ scale: 1.04, borderColor: 'rgba(56, 189, 248, 0.5)' }} 
-                whileTap={{ scale: 0.96 }} 
-                href="/CV_Rahajeng.pdf" 
+              <motion.a
+                whileHover={{ scale: 1.04, borderColor: 'rgba(56, 189, 248, 0.5)' }}
+                whileTap={{ scale: 0.96 }}
+                href="/CV_Rahajeng.pdf"
                 download="CV_Rahajeng.pdf"
                 style={{ ...styles.directMailLink, borderColor: 'rgba(56, 189, 248, 0.35)' }}
                 title="Download CV (PDF)"
@@ -1001,21 +1004,21 @@ function App() {
             </div>
 
             <div style={styles.socialLinks} className="social-links-resp">
-              <motion.a 
-                whileHover={{ y: -4, borderColor: 'rgba(56, 189, 248, 0.4)', color: '#38bdf8' }} 
-                href="https://www.linkedin.com/in/rahajeng-eka-a18b7b320" 
-                target="_blank" 
-                rel="noreferrer" 
+              <motion.a
+                whileHover={{ y: -4, borderColor: 'rgba(56, 189, 248, 0.4)', color: '#38bdf8' }}
+                href="https://www.linkedin.com/in/rahajeng-eka-a18b7b320"
+                target="_blank"
+                rel="noreferrer"
                 style={styles.socialBtn}
               >
                 <FaLinkedinIn size={14} color="#38bdf8" />
                 <span>LinkedIn</span>
               </motion.a>
-              <motion.a 
-                whileHover={{ y: -4, borderColor: 'rgba(56, 189, 248, 0.4)', color: '#38bdf8' }} 
-                href="https://github.com/rahajengeka" 
-                target="_blank" 
-                rel="noreferrer" 
+              <motion.a
+                whileHover={{ y: -4, borderColor: 'rgba(56, 189, 248, 0.4)', color: '#38bdf8' }}
+                href="https://github.com/rahajengeka"
+                target="_blank"
+                rel="noreferrer"
                 style={styles.socialBtn}
               >
                 <FaGithub size={14} color="#38bdf8" />
@@ -1035,14 +1038,14 @@ function App() {
         {/* Back To Top Floating Action Button */}
         <AnimatePresence>
           {showScroll && (
-            <motion.button 
-              initial={{ opacity: 0, scale: 0.8 }} 
-              animate={{ opacity: 1, scale: 1 }} 
-              exit={{ opacity: 0, scale: 0.8 }} 
-              whileHover={{ scale: 1.1, boxShadow: '0 8px 25px rgba(56, 189, 248, 0.5)' }} 
-              whileTap={{ scale: 0.9 }} 
-              onClick={scrollToTop} 
-              style={styles.backToTop} 
+            <motion.button
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.8 }}
+              whileHover={{ scale: 1.1, boxShadow: '0 8px 25px rgba(56, 189, 248, 0.5)' }}
+              whileTap={{ scale: 0.9 }}
+              onClick={scrollToTop}
+              style={styles.backToTop}
               aria-label="Scroll to top"
             >
               <ArrowUp size={18} />
@@ -1070,11 +1073,11 @@ function ProjectCard({ title, tags, desc, link, linkText, image, category }) {
       >
         <div style={{ ...styles.card, border: 'none', boxShadow: 'none', height: '100%' }}>
           <div style={styles.cardTop}>
-            <img 
-              src={image} 
-              alt={title} 
-              style={styles.cardImage} 
-              className="project-img" 
+            <img
+              src={image}
+              alt={title}
+              style={styles.cardImage}
+              className="project-img"
             />
             <div style={styles.cardOverlay}></div>
           </div>
@@ -1088,10 +1091,10 @@ function ProjectCard({ title, tags, desc, link, linkText, image, category }) {
             <p style={styles.cardDesc}>{desc}</p>
             <div style={styles.cardFooter}>
               {link ? (
-                <a 
-                  href={link} 
-                  target="_blank" 
-                  rel="noreferrer" 
+                <a
+                  href={link}
+                  target="_blank"
+                  rel="noreferrer"
                   style={styles.cardLink}
                 >
                   <span>{linkText || (link.includes('github.com') ? 'View Repository' : 'Explore Platform')}</span>
