@@ -440,9 +440,8 @@ function App() {
               <div style={{
                 flex: '1 1 50%',
                 maxWidth: '480px',
-                height: isMobile ? 'clamp(380px, 85vw, 500px)' : '500px',
+                height: isMobile ? '340px' : '500px',
                 width: '100%',
-                maxWidth: isMobile ? '100%' : '480px',
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
