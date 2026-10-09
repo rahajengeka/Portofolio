@@ -440,7 +440,7 @@ function App() {
               <div style={{
                 flex: '1 1 50%',
                 maxWidth: '480px',
-                height: isMobile ? '340px' : '500px',
+                height: isMobile ? '560px' : '500px',
                 width: '100%',
                 display: 'flex',
                 flexDirection: 'column',

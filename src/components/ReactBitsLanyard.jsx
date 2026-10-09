@@ -48,9 +48,9 @@ export default function Lanyard({
   return (
     <div className="lanyard-wrapper">
       <Canvas
-        camera={{ position: isMobile ? [0, 0.15, 5] : position, fov: isMobile ? 45 : fov }}
-        dpr={[1, isMobile ? 1 : 1.5]}
-        gl={{ alpha: transparent, antialias: !isMobile, powerPreference: 'high-performance' }}
+        camera={{ position: isMobile ? [0, 0.15, 6] : position, fov: isMobile ? 40 : fov }}
+        dpr={[1, 1.5]}
+        gl={{ alpha: transparent, antialias: true, powerPreference: 'high-performance' }}
         onCreated={({ gl }) => gl.setClearColor(new THREE.Color(0x000000), transparent ? 0 : 1)}
       >
         <ambientLight intensity={Math.PI} />
@@ -314,9 +314,10 @@ function Band({
   const [dragged, drag] = useState(false);
   const [hovered, hover] = useState(false);
 
-  useRopeJoint(fixed, j1, [[0, 0, 0], [0, 0, 0], 0.50]);
-  useRopeJoint(j1, j2, [[0, 0, 0], [0, 0, 0], 0.50]);
-  useRopeJoint(j2, j3, [[0, 0, 0], [0, 0, 0], 0.50]);
+  const segLen = isMobile ? 0.80 : 0.50;
+  useRopeJoint(fixed, j1, [[0, 0, 0], [0, 0, 0], segLen]);
+  useRopeJoint(j1, j2, [[0, 0, 0], [0, 0, 0], segLen]);
+  useRopeJoint(j2, j3, [[0, 0, 0], [0, 0, 0], segLen]);
   useSphericalJoint(j3, card, [
     [0, 0, 0],
     [0, 1.25, 0]
@@ -390,7 +391,7 @@ function Band({
               <meshPhysicalMaterial
                 map={cardMap}
                 map-anisotropy={16}
-                clearcoat={isMobile ? 0 : 1}
+                clearcoat={1}
                 clearcoatRoughness={0.15}
                 roughness={0.9}
                 metalness={0.8}
@@ -406,11 +407,13 @@ function Band({
         <meshLineMaterial
           color="white"
           depthTest={false}
-          resolution={isMobile ? [1000, 2000] : [1000, 1000]}
+          resolution={isMobile
+            ? [typeof window !== 'undefined' ? window.innerWidth : 390, typeof window !== 'undefined' ? window.innerHeight : 844]
+            : [1000, 1000]}
           useMap
           map={texture}
           repeat={[-4, 1]}
-          lineWidth={lanyardWidth}
+          lineWidth={isMobile ? lanyardWidth * 0.38 : lanyardWidth}
         />
       </mesh>
     </>
